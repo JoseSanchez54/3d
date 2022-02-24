@@ -1,48 +1,28 @@
-import { useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import { useAnimations, useGLTF, Html } from "@react-three/drei";
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
 
-export default function Bird({ speed, factor, url, ...props }) {
-  const { nodes, materials } = useGLTF(url);
-  const test = useGLTF(url);
-  console.log(nodes);
-
+export default function Model(props) {
   const group = useRef();
-
-  /*   useEffect(
-    () => void mixer.clipAction(animations[0], ref.current).play(),
-    [mixer, animations, ref]
-  ); */
-
-  /*   useFrame((state, delta) => {
-    ref.current.rotation.y +=
-      Math.sin((delta * factor) / 2) * Math.cos((delta * factor) / 2) * 1.5;
-    mixer.update(delta * speed);
-  }); */
-
+  const { nodes, materials } = useGLTF("/glb/winee.glb");
   return (
     <group ref={group} {...props} dispose={null}>
-      <group scale={1}>
+      <group
+        position={[-0.22, 0, 0.13]}
+        rotation={[-0.01, 1.05, 0]}
+        scale={[0, 0, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.mesh_id7.geometry}
+          material={materials["69"]}
+          position={[0.03, -256, 256]}
+          scale={1644.5}
+        />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.mesh_id4.geometry}
-          material={materials["59"]}
-          position={[0.03, -256, 256]}
-          scale={1644.5}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.mesh_id5.geometry}
-          material={materials["61"]}
-          position={[0.03, -256, 256]}
-          scale={1644.5}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.mesh_id6.geometry}
           material={materials["63"]}
           position={[0.03, -256, 256]}
           scale={1644.5}
@@ -50,7 +30,15 @@ export default function Bird({ speed, factor, url, ...props }) {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.mesh_id7.geometry}
+          geometry={nodes.mesh_id6.geometry}
+          material={materials["67"]}
+          position={[0.03, -256, 256]}
+          scale={1644.5}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.mesh_id5.geometry}
           material={materials["65"]}
           position={[0.03, -256, 256]}
           scale={1644.5}
@@ -59,3 +47,5 @@ export default function Bird({ speed, factor, url, ...props }) {
     </group>
   );
 }
+
+useGLTF.preload("/glb/winee.glb");
